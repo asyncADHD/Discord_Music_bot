@@ -1,6 +1,7 @@
 import discord
 import os
 
+# i really dont know why this is not working
 
 client = discord.Client()
 
