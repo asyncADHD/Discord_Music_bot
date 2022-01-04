@@ -1,13 +1,12 @@
 import discord
 import os
 
-# i really dont know why this is not working
 
 client = discord.Client()
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print('You have logged in as {0.user}'.format(client))
 
 @client.event
 async def on_message(message):
@@ -32,6 +31,5 @@ async def on_message(message):
         await message.channel.send('Hi, I\'m a bot!, If I don\'t respond to you, please contact the owner of this bot.')
 
 
-        
 
 client.run('OTAxMDE5MjI0NDM5Mzk0MzI1.YXJxiw.8mcrfoq95A2-S8sLRsGWE2FQF_0')
