@@ -1,6 +1,6 @@
 import discord
 import os
-from youtubesearchpython import *
+
 
 client = discord.Client()
 
@@ -15,6 +15,20 @@ async def on_message(message):
 
     if message.content.startswith('$hello'):
         await message.channel.send('Yo, what\'s up?')
+
+    if message.content.startswith('$ping'):
+        await message.channel.send('Pong!')
+
+    if message.content.startswith('$test'):
+        await message.channel.send('Test!')
+    
+    if message.content.startswith('$date'):
+        var = os.popen('date').read()
+        
+        await message.channel.send(var)
+
+    if message.content.startswith('$help'):
+        await message.channel.send('Hi, I\'m a bot!, If I don\'t respond to you, please contact the owner of this bot.')
 
 
         
