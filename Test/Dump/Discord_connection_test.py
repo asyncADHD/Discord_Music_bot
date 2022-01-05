@@ -1,6 +1,11 @@
 import discord
 import os
 from youtubesearchpython import *
+from discord.ext import commands
+
+
+intents = discord.Intents().all()
+bot = commands.Bot(command_prefix='!',intents=intents)
 
 
 client = discord.Client()
@@ -8,6 +13,22 @@ client = discord.Client()
 @client.event
 async def on_ready():
     print('You have logged in as {0.user}'.format(client))
+
+@bot.command(name='join', help='Tells the bot to join the voice channel')
+async def join(ctx):
+    if not ctx.message.author.voice:
+        await ctx.send("{} is not connected to a voice channel".format(ctx.message.author.name))
+        return
+    else:
+        channel = ctx.message.author.voice.channel
+    await channel.connect()
+@bot.command(name='leave', help='To make the bot leave the voice channel')
+async def leave(ctx):
+    voice_client = ctx.message.guild.voice_client
+    if voice_client.is_connected():
+        await voice_client.disconnect()
+    else:
+        await ctx.send("The bot is not connected to a voice channel.")
 
 @client.event
 async def on_message(message):
@@ -44,13 +65,13 @@ async def on_message(message):
         
         await message.channel.send((URL))
 
-
-
-
-
-
-
-
+@client.command()
+async def join(ctx):
+    channel = ctx.author.voice.channel
+    await channel.connect()
+@client.command()
+async def leave(ctx):
+    await ctx.voice_client.disconnect()
 
 
 
