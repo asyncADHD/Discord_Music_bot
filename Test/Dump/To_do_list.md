@@ -1,0 +1,11 @@
+- Que
+- Skip
+- Pause
+- Play
+- Resume
+- Add_next
+- Add_prio_next
+- Clear
+- Is_que_empty
+- ETA
+- Shuffle
