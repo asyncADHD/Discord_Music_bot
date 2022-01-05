@@ -1,5 +1,6 @@
 import discord
 import os
+from youtubesearchpython import *
 
 
 client = discord.Client()
@@ -29,6 +30,32 @@ async def on_message(message):
 
     if message.content.startswith('$help'):
         await message.channel.send('Hi, I\'m a bot!, If I don\'t respond to you, please contact the owner of this bot.')
+
+    if message.content.startswith('$P'):
+        unstripedvar = message.content
+        stripedvar = unstripedvar.strip('$P')
+        print(stripedvar)
+        
+        variable = stripedvar
+        customsearch = CustomSearch(variable, VideoSortOrder.viewCount,limit=1)
+
+        for i in range(1):
+            URL = (customsearch.result()['result'][i]['link'])
+        
+        await message.channel.send((URL))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
