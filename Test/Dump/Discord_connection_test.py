@@ -6,7 +6,7 @@ from discord.ext import commands, tasks
 
 
 intents = discord.Intents().all()
-bot = commands.Bot(command_prefix='!',intents=intents)
+# bot = commands.Bot(command_prefix='!',intents=intents)
 
 
 client = discord.Client()
@@ -49,11 +49,7 @@ async def on_message(message):
 
         for i in range(1):
             URL = (customsearch.result()['result'][i]['link'])
-        
         await message.channel.send((URL))
-
-
-
 
 
 
