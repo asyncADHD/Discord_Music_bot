@@ -59,7 +59,7 @@ async def join():
 
 
 
-
+# chenel ID 928313914507268168
 
 
 
