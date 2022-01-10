@@ -51,6 +51,12 @@ async def on_message(message):
             URL = (customsearch.result()['result'][i]['link'])
         await message.channel.send((URL))
 
+@client.event
+async def join():
+    channel = client.get_channel(739079079172869888)
+    await channel.connect()
+
+
 
 
 
