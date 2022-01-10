@@ -53,7 +53,7 @@ async def on_message(message):
 
 @client.event
 async def join():
-    channel = client.get_channel(739079079172869888)
+    channel = client.get_channel(928313914507268168)
     await channel.connect()
 
 
