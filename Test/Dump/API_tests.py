@@ -36,6 +36,7 @@
 '''
 
 
+from discord import channel
 from youtubesearchpython import *
 
 def Discord_MV_url():
@@ -46,6 +47,39 @@ def Discord_MV_url():
         return (customsearch.result()['result'][i]['link'])
 
 print (Discord_MV_url()) 
+
+
+
+
+import discord
+import youtube_dl
+from discord.ext import commands
+
+TOKEN = 'OTAxMDE5MjI0NDM5Mzk0MzI1.YXJxiw.8mcrfoq95A2-S8sLRsGWE2FQF_0'
+client = commands.Bot(command_prefix='!')
+
+@client.event
+async def on_ready():
+    print('You have logged in as {0.user}'.format(client))
+
+@client.command(pass_context=True)
+async def join(ctx):
+    channel = ctx.message.author.voice.voice_channel
+    await client.join_voice_channel(channel)
+
+@client.command(pass_context=True)
+async def leave(ctx):
+    server = ctx.message.server
+    voice_client = client.voice_client_in(server)
+    await voice_client.disconnect()
+
+@client.command(pass_context=True)
+async def play(ctx, url):
+    server = ctx.message.server
+    voice_client = client.voice_client_in(server)
+    player = await voice_client.create_ytdl_player(url)
+    players[server.id] = player
+    player.start()
 
 
 
