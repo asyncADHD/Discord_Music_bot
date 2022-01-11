@@ -90,12 +90,15 @@ async def clear(ctx, amount=10):
 def is_me(ctx):
     return ctx.author.id == 425577187387768842
 
+# @client.command()
+# @commands.check()
+# async def Is_it_me(is_me):
+#     await is_me.send(f'Hi {is_me.author.mention}')
+
 @client.command()
-@commands.check()
-async def Is_it_me(is_me):
-    await is_me.send(f'Hi {is_me.author.mention}')
-
-
+async def join(ctx):
+    channel = ctx.author.voice.channel
+    await channel.connect()
 
 @client.command()
 async def play(ctx, *, url):
