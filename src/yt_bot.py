@@ -3,6 +3,7 @@ from discord import message
 from discord.ext import commands
 import youtube_dl
 import random 
+from yahoo_fin import stock_info as si
 
 client = commands.Bot(command_prefix='!')
 players = {}
@@ -102,12 +103,45 @@ async def join(ctx):
     await channel.connect()
 
 @client.command()
-async def play(ctx, url):
-    server = ctx.message.guild
-    voice_client = client.voice_client_in(server)
-    player = await voice_client.create_ytdl_player(url)
-    players[server.id] = player
-    player.start()
+async def welcome(ctx):
+    await ctx.send('Welcome to the server')
+
+@client.command()
+async def price(ctx, *, stock):
+    price = si.get_live_price(stock)
+    price_f = "{:,.2f}".format(price)
+    await ctx.send(f'The current price of {stock} is ${price_f}')
+
+
+@client.command()
+async def random_number(ctx, min, max):
+    await ctx.send(f'Random number between {min} and {max}: {random.randint(min, max)}')
+
+@client.command()
+async def flip_a_coin(ctx):
+    await ctx.send(f'Coin flip: {random.choice(["Heads", "Tails"])}')
+    
+
+
+
+
+@client.command()
+async def Help(ctx):
+    embed = discord.Embed(title='Help', description='List of commands', color=0xeee657)
+
+    embed.add_field(name='!8ball', value='Ask the magic 8 ball a question', inline=False)
+    embed.add_field(name='!clear', value='Clear the chat', inline=False)
+    embed.add_field(name='!kick', value='Kick a member', inline=False)
+    embed.add_field(name='!ban', value='Ban a member', inline=False)
+    embed.add_field(name='!unban', value='Unban a member', inline=False)
+    embed.add_field(name='!join', value='Join the voice channel', inline=False)
+    embed.add_field(name='!welcome', value='Welcome message', inline=False)
+    embed.add_field(name='!price', value='Get the current price of a stock', inline=False)
+    embed.add_field(name='!random_number', value='Get a random number', inline=False)
+    embed.add_field(name='!flip_a_coin', value='Flip a coin', inline=False)
+
+
+    await ctx.send(embed=embed)
 
 
 
@@ -122,5 +156,5 @@ async def play(ctx, url):
 
 
 
-client.run('OTMwNDQyMDcxNzQxOTU2MTI2.Yd17tA.vJWOjhfn2LM5HOgpzZy4hA85GI8')
+client.run('OTMwNDQyMDcxNzQxOTU2MTI2.Yd17tA.7bbGv3jRp7MskZ6ocEgvj__6KeQ')
 
